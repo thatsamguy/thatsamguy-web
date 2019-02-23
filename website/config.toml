@@ -1,0 +1,19 @@
+base_url = "https://thatsamguy.com"
+title = "Sam Bailey"
+description = "(thatsamguy)"
+compile_sass = true
+highlight_code = true
+build_search_index = true
+theme = "hyde"
+
+[extra]
+hyde_sticky = true
+hyde_reverse = false
+hyde_theme = ""
+hyde_links = [
+    {url = "/about/", name = "About Sam"},
+    {url = "#", name = ""},
+    {url = "https://twitter.com/that_sam_guy", name = "Twitter: @that_sam_guy"},
+    {url = "https://github.com/thatsamguy", name = "GitHub: thatsamguy"},
+    {url = "https://www.linkedin.com/in/thatsamguy", name = "LinkedIn: thatsamguy"},
+]
