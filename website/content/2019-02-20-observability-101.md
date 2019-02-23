@@ -61,6 +61,8 @@ Considering this concept of monitoring, [Cindy Sridharan](https://twitter.com/co
 
 ![Venn diagram of Observability, Monitoring and Testing](https://cdn-images-1.medium.com/max/1600/1*9BQUrLJoR_SE69Kd8oVlVw.png "Venn diagram of Observability, Monitoring and Testing")
 
+Ref: [Monitoring and Observability][1]
+
 The best part of the superset idea is that we're not starting from scratch. We can and should be monitoring systems, using alerts and centralising our logs and all the best practices that have been built up over time.
 
 What we do need however is a change in culture and thinking to consider the problem from a new perspective - from the top down, instead of bottom up - and allow fresh thinking without the classic restraints and patterns of traditional monitoring practices (E.g.: lack of high cardinality, metrics without context).
