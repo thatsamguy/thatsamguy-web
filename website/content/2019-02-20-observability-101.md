@@ -39,7 +39,7 @@ Critically we need:
 
 Isn't this the same as Monitoring? Don't we already collect metrics and logs, search data to find issues and create dashboards to tell us if all is ok?
 
-[Simon Wistow](https://twitter.com/deflatermouse) suggest that [this is not the case][5]:
+[Simon Wistow](https://twitter.com/deflatermouse) suggests that [this is not the case][5]:
 >Monitoring and logs are no longer enough
 >
 >Monitoring is the activity of observing the state of a system over time. [...] Monitoring alerts are reactive–they tell you when a known issue has already occurred.
