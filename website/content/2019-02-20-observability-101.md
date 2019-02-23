@@ -88,7 +88,7 @@ From a business perspective:
 > * Happier developers
 > * Greater customer satisfaction
 
-Ref: ([Honeycomb][7])
+Ref: [Honeycomb][7]
 
 But that sounds like nice piece of fluff.
 
