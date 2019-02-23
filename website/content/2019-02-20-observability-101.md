@@ -67,7 +67,7 @@ The best part of the superset idea is that we're not starting from scratch. We c
 
 What we do need however is a change in culture and thinking to consider the problem from a new perspective - from the top down, instead of bottom up - and allow fresh thinking without the classic restraints and patterns of traditional monitoring practices (E.g.: lack of high cardinality, metrics without context).
 
-Context is everything. Metrics and dashboards can easily show that you are meeting a SLA of 99.95% - but what does this really mean for your customer? Telling your customer that you are meeting your SLA's doesn't change their experience. E.g. The Amazon Web Services status page.
+Context is everything. Metrics and dashboards can easily show that you are meeting an SLA of 99.95% - but what does this really mean for your customer? Telling your customer that you are meeting your SLA's doesn't change their experience. E.g. The Amazon Web Services status page.
 
 In reality for a 99.95% SLA almost all your customers are working 100% just fine, a few others are effectively working at a 0%-50% SLA level. We need to be able to quickly locate those affected customers/requests and address the issue specific to them.
 
