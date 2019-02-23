@@ -1,8 +1,9 @@
 +++
 title = "Observability 101"
 date = 2019-02-20
-
 +++
+The following post is based upon a previous blog post and talk I gave at [work](https://www.rea-group.com "REA Group") recently.
+
 ## Moving beyond monitoring
 
 The concept of "observability" (shortened as "```o11y```") has slowly been gaining traction within the Tech industry recently as an alternative to the existing thought patterns around monitoring.
@@ -144,6 +145,8 @@ In practice for most this means implementing beyond their current monitoring:
 * Distributed tracing - being able to follow a request coming into and out of the system through the many sub-systems owned by multiple teams across a business
 * Visualisation/Analytics tooling - bringing all the data together and allowing easy and timely access to the information, no matter the question
 * Process change - engineers using the fast feedback loops frequently - build, deploy, observe - to gain understanding of what is normal/abnormal in a system and to ensure that the change had the desired impact quickly
+
+[Edit 2019-02-23] Please also note that if you have sufficiently populated events as your single data source, you can derive all the metrics, lower content logs and alerts all from the event data. See [Charity's recent tweet thread](https://twitter.com/mipsytipsy/status/1098779777136115712) for further info.
 
 ## Further reading/listening
 
