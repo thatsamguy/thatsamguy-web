@@ -35,19 +35,19 @@ A quick internet search will show many others having the same issue without a si
 After much effort, I finally found the right regex that would work within a default Nginx install.
 
 ``` Nginx
-   map \$time_iso8601 \$time_iso8601_p1 {
-     ~([^+]+) \$1;
+   map $time_iso8601 $time_iso8601_p1 {
+     ~([^+]+) $1;
    }
-   map \$time_iso8601 \$time_iso8601_p2 {
-     ~\\+([0-9:]+)\$ \$1;
+   map $time_iso8601 $time_iso8601_p2 {
+     ~\+([0-9:]+)$ $1;
    }
-   map \$msec \$millisec {
-     ~\\.([0-9]+)\$ \$1;
+   map $msec $millisec {
+     ~\.([0-9]+)$ $1;
    }
 
   log_format json escape=json '{'
-    '"timestamp":"\$time_iso8601_p1.\$millisec+\$time_iso8601_p2",'
-    '"status":"\$status",'
+    '"timestamp":"$time_iso8601_p1.$millisec+$time_iso8601_p2",'
+    '"status":"$status",'
     '}';
 ```
 
