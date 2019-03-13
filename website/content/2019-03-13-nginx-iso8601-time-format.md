@@ -22,7 +22,7 @@ E.g.: `2019-03-05T04:02:30.627+00:00`
 
 How do we log time in ISO8601 format with millisecond precision within Nginx if we don't have that available?
 
-A quick internet search will show many others having the same issue without a simple solution.
+A quick (or not so quick) internet search showed me many others having the same issue without a simple solution.
 
 **Option 1:** Log both variables, then use some other program to merge the milliseconds from `$msec` into the `$time_iso8601`. (E.g.: Logstash)
 
