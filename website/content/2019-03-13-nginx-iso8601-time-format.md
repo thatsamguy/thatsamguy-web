@@ -47,7 +47,7 @@ After much effort, I finally found the right regex that would work within a defa
 
   log_format json escape=json '{'
     '"timestamp":"$time_iso8601_p1.$millisec+$time_iso8601_p2",'
-    '"status":"$status",'
+    '"status":"$status"'
     '}';
 ```
 
@@ -56,6 +56,6 @@ Result (prettified through `jq`):
 ``` JSON
 {
   "timestamp": "2019-03-05T04:02:30.627+00:00",
-  "status": "200",
+  "status": "200"
 }
 ```
