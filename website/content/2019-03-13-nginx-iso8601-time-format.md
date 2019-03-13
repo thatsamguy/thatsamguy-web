@@ -6,9 +6,9 @@ date = 2019-03-13
 Nginx has two variables for time that you can use in your logs.
 
 * `$msec` - Unix timestamp with millisecond precision
-  * E.g.: `2019-03-05T04:02:30+00:00`
-* `$time_iso8601` - ISO8601 format time with second precision
   * E.g.: `1551758550.627`
+* `$time_iso8601` - ISO8601 format time with second precision
+  * E.g.: `2019-03-05T04:02:30+00:00`
 
 See: [http://nginx.org/en/docs/http/ngx_http_log_module.html#log_format](http://nginx.org/en/docs/http/ngx_http_log_module.html#log_format)
 
