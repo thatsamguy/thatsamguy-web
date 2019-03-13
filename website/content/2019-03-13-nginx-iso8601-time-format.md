@@ -14,7 +14,7 @@ See: [http://nginx.org/en/docs/http/ngx_http_log_module.html#log_format](http://
 
 Having milliseconds is really useful for debugging, but Unix timestamps are not easy for humans to read.
 
-**Solution** - Log in ISO8601 format with millisecond precision (which is a part of the specification)
+**Solution** - Log in [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) format with millisecond precision (which is a part of the specification)
 
 E.g.: `2019-03-05T04:02:30.627+00:00`
 
