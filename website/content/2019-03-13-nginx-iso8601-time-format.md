@@ -26,7 +26,7 @@ A quick internet search will show many others having the same issue without a si
 
 **Option 1:** Log both variables, then use some other program to merge the milliseconds from `$msec` into the `$time_iso8601`. (E.g.: Logstash)
 
-**Option 2:** Patch Nginx to have millisecond support in `$time_8601` (looks like it was proposed a few years ago without progress)
+**Option 2:** Patch Nginx to have millisecond support in `$time_iso8601` (looks like it was proposed a few years ago without progress)
 
 **Option 3:** Merge `$msec` and `$time_iso8601` *within Nginx*
 
