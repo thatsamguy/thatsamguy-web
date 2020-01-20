@@ -22,7 +22,7 @@ Previously (2012-2018): [Schoolbox](https://schoolbox.com.au/)
 
 Location: Melbourne, Australia
 
-Role: Systems Engineer
+Role: [Senior Systems Engineer](https://www.linkedin.com/in/thatsamguy)
 
 Main interests (outside of spending time with my wife and two children):
 
