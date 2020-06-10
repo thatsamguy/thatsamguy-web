@@ -16,13 +16,16 @@ GitHub: [thatsamguy](https://github.com/thatsamguy)
 
 LinkedIn: [thatsamguy](https://www.linkedin.com/in/thatsamguy)
 
-Employer: [REA Group](https://www.rea-group.com)
+Employer: TBA
 
-Previously (2012-2018): [Schoolbox](https://schoolbox.com.au/)
+Previously:
+
+* (2019-2020) - [REA Group](https://www.rea-group.com) - Senior Systems Engineer
+* (2012-2018) - [Schoolbox](https://schoolbox.com.au/) - Systems Engineer
 
 Location: Melbourne, Australia
 
-Role: [Senior Systems Engineer](https://www.linkedin.com/in/thatsamguy)
+Role: [TBA](https://www.linkedin.com/in/thatsamguy)
 
 Main interests (outside of spending time with my wife and two children):
 
