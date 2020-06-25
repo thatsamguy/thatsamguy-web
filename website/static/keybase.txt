@@ -1,0 +1,55 @@
+==================================================================
+https://keybase.io/thatsamguy
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://thatsamguy.com
+  * I am thatsamguy (https://keybase.io/thatsamguy) on keybase.
+  * I have a public key ASDvxm3l0-4UEILdBlCSheduqp0JkL2YQ1lub2Qc9WUUPgo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120efc66de5d3ee141082dd06509285e76eaa9d0990bd9843596e6f641cf565143e0a",
+      "host": "keybase.io",
+      "kid": "0120efc66de5d3ee141082dd06509285e76eaa9d0990bd9843596e6f641cf565143e0a",
+      "uid": "eb8c453a03094830a93b9aaba0ff2a19",
+      "username": "thatsamguy"
+    },
+    "merkle_root": {
+      "ctime": 1519795340,
+      "hash": "34d43b801fa6be509ba97c120575352d2bfc0d8dae86a6b2bf68c65b9a4f1ce39ca2b7ed2238f7306306ea88c62daef17a1f863528dcc184f97c08aad30efe8a",
+      "hash_meta": "ff6c40b32144086315363792d39faf35c79b87ce25d698aa1b322cd20aaa9cee",
+      "seqno": 2164452
+    },
+    "service": {
+      "hostname": "thatsamguy.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "1.0.44"
+  },
+  "ctime": 1519795365,
+  "expire_in": 504576000,
+  "prev": "0bac88c8e862d0e534ffcb66cb039e2b832412344239ed99cf2ed736b83f1733",
+  "seqno": 10,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg78Zt5dPuFBCC3QZQkoXnbqqdCZC9mENZbm9kHPVlFD4Kp3BheWxvYWTFA0l7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTIwZWZjNjZkZTVkM2VlMTQxMDgyZGQwNjUwOTI4NWU3NmVhYTlkMDk5MGJkOTg0MzU5NmU2ZjY0MWNmNTY1MTQzZTBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwZWZjNjZkZTVkM2VlMTQxMDgyZGQwNjUwOTI4NWU3NmVhYTlkMDk5MGJkOTg0MzU5NmU2ZjY0MWNmNTY1MTQzZTBhIiwidWlkIjoiZWI4YzQ1M2EwMzA5NDgzMGE5M2I5YWFiYTBmZjJhMTkiLCJ1c2VybmFtZSI6InRoYXRzYW1ndXkifSwibWVya2xlX3Jvb3QiOnsiY3RpbWUiOjE1MTk3OTUzNDAsImhhc2giOiIzNGQ0M2I4MDFmYTZiZTUwOWJhOTdjMTIwNTc1MzUyZDJiZmMwZDhkYWU4NmE2YjJiZjY4YzY1YjlhNGYxY2UzOWNhMmI3ZWQyMjM4ZjczMDYzMDZlYTg4YzYyZGFlZjE3YTFmODYzNTI4ZGNjMTg0Zjk3YzA4YWFkMzBlZmU4YSIsImhhc2hfbWV0YSI6ImZmNmM0MGIzMjE0NDA4NjMxNTM2Mzc5MmQzOWZhZjM1Yzc5Yjg3Y2UyNWQ2OThhYTFiMzIyY2QyMGFhYTljZWUiLCJzZXFubyI6MjE2NDQ1Mn0sInNlcnZpY2UiOnsiaG9zdG5hbWUiOiJ0aGF0c2FtZ3V5LmNvbSIsInByb3RvY29sIjoiaHR0cHM6In0sInR5cGUiOiJ3ZWJfc2VydmljZV9iaW5kaW5nIiwidmVyc2lvbiI6MX0sImNsaWVudCI6eyJuYW1lIjoia2V5YmFzZS5pbyBnbyBjbGllbnQiLCJ2ZXJzaW9uIjoiMS4wLjQ0In0sImN0aW1lIjoxNTE5Nzk1MzY1LCJleHBpcmVfaW4iOjUwNDU3NjAwMCwicHJldiI6IjBiYWM4OGM4ZTg2MmQwZTUzNGZmY2I2NmNiMDM5ZTJiODMyNDEyMzQ0MjM5ZWQ5OWNmMmVkNzM2YjgzZjE3MzMiLCJzZXFubyI6MTAsInRhZyI6InNpZ25hdHVyZSJ9o3NpZ8RAj/uff2ub55b6J8OIlYmNMCb6qpeCVgm0JNfwaxkGHEiPT9WX9UPJqQLUI+NiK0kzaodN9KN8Er9gJFvc286kBqhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIFZLRYdgmkW46lj0UqrTg1bt06KdMl/+IYJP6ANtkNbdo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/thatsamguy
+
+==================================================================
