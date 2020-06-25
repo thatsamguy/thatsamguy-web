@@ -1,0 +1,49 @@
+jobs:
+- name: build
+  plan:
+  - get: thatsamguy-web
+    trigger: true
+  - config:
+      image_resource:
+        source:
+          repository: fedora
+          tag: "31"
+        type: registry-image
+      inputs:
+      - name: thatsamguy-web
+      outputs:
+      - name: public
+        path: public/
+      platform: linux
+      run:
+        args:
+        - -euxc
+        - dnf install -y zola && cd thatsamguy-web/website && zola build && cp -vr
+          public/* ../../public/
+        path: bash
+    task: build
+  - put: deploy-bucket
+resource_types:
+- name: s3-sync
+  source:
+    repository: firespring/concourse-s3-sync-resource
+  type: docker-image
+resources:
+- name: thatsamguy-web
+  source:
+    branch: main
+    password: ((github-password))
+    uri: https://github.com/thatsamguy/thatsamguy-web.git
+    username: ((github-username))
+  type: git
+- name: deploy-bucket
+  source:
+    access_key_id: ((aws-access-key-id))
+    bucket: aws-website-thatsamguy-00trx
+    directory: public/
+    options:
+    - --exclude '.git*'
+    - --exclude 'wu/*'
+    region: us-east-1
+    secret_access_key: ((aws-secret-access-key))
+  type: s3-sync
