@@ -16,7 +16,7 @@ GitHub: [thatsamguy](https://github.com/thatsamguy)
 
 LinkedIn: [thatsamguy](https://www.linkedin.com/in/thatsamguy)
 
-Employer: TBA
+Employer: [Slack](https://slack.com/)
 
 Previously:
 
@@ -25,7 +25,7 @@ Previously:
 
 Location: Melbourne, Australia
 
-Role: [TBA](https://www.linkedin.com/in/thatsamguy)
+Role: [Senior Cloud Engineer](https://www.linkedin.com/in/thatsamguy)
 
 Main interests (outside of spending time with my wife and two children):
 
