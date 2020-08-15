@@ -1,5 +1,5 @@
 jobs:
-- name: reconfigure
+- name: pipeline
   plan:
   - get: thatsamguy-web
     trigger: true
@@ -9,7 +9,7 @@ jobs:
   plan:
   - get: thatsamguy-web
     passed:
-    - reconfigure
+    - update-pipeline
     trigger: true
   - config:
       image_resource:
@@ -30,21 +30,23 @@ jobs:
           public/* ../../public/
         path: bash
     task: build
-  - put: deploy-bucket
+  - put: deploy
 resource_types:
 - name: s3-sync
   source:
     repository: firespring/concourse-s3-sync-resource
   type: docker-image
 resources:
-- name: thatsamguy-web
+- icon: github
+  name: thatsamguy-web
   source:
     branch: main
     password: ((github-password))
     uri: https://github.com/thatsamguy/thatsamguy-web.git
     username: ((github-username))
   type: git
-- name: deploy-bucket
+- icon: bucket
+  name: deploy
   source:
     access_key_id: ((aws-access-key-id))
     bucket: aws-website-thatsamguy-00trx
