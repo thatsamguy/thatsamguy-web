@@ -6,6 +6,33 @@ jobs:
   - file: thatsamguy-web/pipeline.yml
     set_pipeline: thatsamguy-web
 - name: build
+  on_error:
+    params:
+      channel: '#build'
+      icon_url: https://concourse-ci.org/images/trademarks/concourse-black.png
+      silent: true
+      text: |
+        :boom: A build of $BUILD_PIPELINE_NAME errored. Check it out <((ci-url))/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME|here>.
+      username: concourse
+    put: notify
+  on_failure:
+    params:
+      channel: '#build'
+      icon_url: https://concourse-ci.org/images/trademarks/concourse-black.png
+      silent: true
+      text: |
+        :boom: A build of $BUILD_PIPELINE_NAME failed. Check it out <((ci-url))/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME|here>.
+      username: concourse
+    put: notify
+  on_success:
+    params:
+      channel: '#build'
+      icon_url: https://concourse-ci.org/images/trademarks/concourse-black.png
+      silent: true
+      text: |
+        :airplane_departure: A new build of $BUILD_PIPELINE_NAME deployed! Check it out <((ci-url))/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME|here>.
+      username: concourse
+    put: notify
   plan:
   - get: thatsamguy-web
     passed:
@@ -36,6 +63,10 @@ resource_types:
   source:
     repository: firespring/concourse-s3-sync-resource
   type: docker-image
+- name: slack-notification
+  source:
+    repository: cfcommunity/slack-notification-resource
+  type: docker-image
 resources:
 - icon: github
   name: thatsamguy-web
@@ -56,3 +87,7 @@ resources:
     region: us-east-1
     secret_access_key: ((aws-secret-access-key))
   type: s3-sync
+- name: notify
+  source:
+    url: ((slack-webhook))
+  type: slack-notification
