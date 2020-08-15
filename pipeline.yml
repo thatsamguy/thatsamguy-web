@@ -9,7 +9,7 @@ jobs:
   plan:
   - get: thatsamguy-web
     passed:
-    - update-pipeline
+    - pipeline
     trigger: true
   - config:
       image_resource:
