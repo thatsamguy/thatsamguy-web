@@ -1,7 +1,15 @@
 jobs:
+- name: reconfigure
+  plan:
+  - get: thatsamguy-web
+    trigger: true
+  - file: thatsamguy-web/pipeline.yml
+    set_pipeline: thatsamguy-web
 - name: build
   plan:
   - get: thatsamguy-web
+    passed:
+    - reconfigure
     trigger: true
   - config:
       image_resource:
