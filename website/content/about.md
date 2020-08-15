@@ -27,9 +27,9 @@ Location: Melbourne, Australia
 
 Role: [Senior Cloud Engineer](https://www.linkedin.com/in/thatsamguy)
 
-Main interests (outside of spending time with my wife and two children):
+Main interests (outside of spending time with my wife, two children and two cats):
 
-* DevOps culture and automation software – Puppet, Vagrant, [Concourse CI](https://concourse-ci.org/)
+* DevOps culture and automation software – [Concourse CI](https://concourse-ci.org/)
 * Open source software – [Mageia Linux](https://mageia.org/), [Clear Linux](https://clearlinux.org/), [Nginx](https://nginx.org/), [MariaDB](https://mariadb.org/), [WireGuard](https://wireguard.com/)
 * [Geelong Cats](http://www.geelongcats.com.au/) (AFL), [Everton](http://www.evertonfc.com/home) (EPL)
 
