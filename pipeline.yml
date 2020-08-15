@@ -45,8 +45,7 @@ resources:
     uri: https://github.com/thatsamguy/thatsamguy-web.git
     username: ((github-username))
   type: git
-- icon: bucket
-  name: deploy
+- name: deploy
   source:
     access_key_id: ((aws-access-key-id))
     bucket: aws-website-thatsamguy-00trx
