@@ -87,7 +87,8 @@ resources:
     region: us-east-1
     secret_access_key: ((aws-secret-access-key))
   type: s3-sync
-- name: notify
+- icon: slack
+  name: notify
   source:
     url: ((slack-webhook))
   type: slack-notification
