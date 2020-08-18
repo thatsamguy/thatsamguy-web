@@ -1,3 +1,10 @@
+groups:
+- jobs:
+  - build
+  name: build
+- jobs:
+  - pipeline
+  name: pipeline-update
 jobs:
 - name: pipeline
   plan:
@@ -73,9 +80,9 @@ resources:
   source:
     branch: main
     password: ((github-password))
+    private_key: ((github-private-key))
     uri: git@github.com:thatsamguy/thatsamguy-web.git
     username: ((github-username))
-    private_key: ((github-private-key))
   type: git
 - name: deploy
   source:
