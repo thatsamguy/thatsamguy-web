@@ -68,9 +68,9 @@ jobs:
         - -euxc
         - if [ "$(cat thatsamguy-letsencrypt/version)" != "0" ]; then tar xzvf thatsamguy-letsencrypt/letsencrypt.tar.gz;
           else echo "No cache tarball located. Starting bootstrap."; fi; certbot certonly
-          -n --agree-tos --no-eff-email --email webmaster@thatsamguy.com --dns-route53
-          -d thatsamguy.com -d '*.thatsamguy.com' --renew-by-default && tar czvf build/letsencrypt.tar.gz
-          /etc/letsencrypt;
+          --config-dir etc/letsencrypt -n --agree-tos --no-eff-email --email webmaster@thatsamguy.com
+          --dns-route53 -d thatsamguy.com -d '*.thatsamguy.com' --renew-by-default
+          && tar czvf build/letsencrypt.tar.gz etc/letsencrypt;
         path: bash
     task: generate-certs
   - params:
