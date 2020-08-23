@@ -1,0 +1,118 @@
+groups:
+- jobs:
+  - generate-certs
+  name: build
+- jobs:
+  - pipeline
+  name: pipeline-update
+jobs:
+- name: pipeline
+  plan:
+  - get: thatsamguy-letsencrypt
+  - get: thatsamguy-web
+    trigger: true
+  - file: thatsamguy-web/pipeline-letsencrypt.yml
+    set_pipeline: thatsamguy-web
+- name: generate-certs
+  on_error:
+    params:
+      channel: '#build'
+      icon_url: https://concourse-ci.org/images/trademarks/concourse-black.png
+      silent: true
+      text: |
+        :boom: A build of $BUILD_PIPELINE_NAME errored. Check it out <((ci-url))/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME|here>.
+      username: concourse
+    put: notify
+  on_failure:
+    params:
+      channel: '#build'
+      icon_url: https://concourse-ci.org/images/trademarks/concourse-black.png
+      silent: true
+      text: |
+        :boom: A build of $BUILD_PIPELINE_NAME failed. Check it out <((ci-url))/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME|here>.
+      username: concourse
+    put: notify
+  on_success:
+    params:
+      channel: '#build'
+      icon_url: https://concourse-ci.org/images/trademarks/concourse-black.png
+      silent: true
+      text: |
+        :airplane_departure: A new build of $BUILD_PIPELINE_NAME deployed! Check it out <((ci-url))/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME|here>.
+      username: concourse
+    put: notify
+  plan:
+  - get: thatsamguy-letsencrypt
+    passed:
+    - pipeline
+  - get: every-monday
+    trigger: true
+  - config:
+      image_resource:
+        source:
+          repository: thatsamguy/certbot-dns
+          tag: latest
+        type: registry-image
+      inputs:
+      - name: thatsamguy-letsencrypt
+      outputs:
+      - name: build
+        path: build/
+      params:
+        AWS_ACCESS_KEY_ID: ((aws-access-key-id))
+        AWS_DEFAULT_REGION: us-east-1
+        AWS_SECRET_ACCESS_KEY: ((aws-secret-access-key))
+      platform: linux
+      run:
+        args:
+        - -euxc
+        - if [ "$(cat thatsamguy-letsencrypt/version)" != "0" ]; then tar xzvf thatsamguy-letsencrypt/letsencrypt.tar.gz;
+          else echo "No cache tarball located. Starting bootstrap."; fi; certbot certonly
+          -n --agree-tos --no-eff-email --email webmaster@thatsamguy.com --dns-route53
+          -d thatsamguy.com -d '*.thatsamguy.com' --renew-by-default && tar czvf build/letsencrypt.tar.gz
+          /etc/letsencrypt;
+        path: bash
+    task: generate-certs
+  - params:
+      file: build/letsencrypt.tar.gz
+    put: thatsamguy-letsencrypt
+resource_types:
+- name: slack-notification
+  source:
+    repository: cfcommunity/slack-notification-resource
+  type: docker-image
+resources:
+- icon: github
+  name: thatsamguy-web
+  source:
+    branch: main
+    password: ((github-password))
+    paths: pipeline-letsencrypt.yml
+    private_key: ((github-private-key))
+    uri: git@github.com:thatsamguy/thatsamguy-web.git
+    username: ((github-username))
+  type: git
+- name: thatsamguy-letsencrypt
+  source:
+    access_key_id: ((aws-access-key-id))
+    bucket: thatsamguy-letsencrypt
+    initial_version: "0"
+    private: true
+    region_name: us-east-1
+    secret_access_key: ((aws-secret-access-key))
+    versioned_file: letsencrypt.tar.gz
+  type: s3
+- icon: slack
+  name: notify
+  source:
+    url: ((slack-webhook))
+  type: slack-notification
+- icon: clock-outline
+  name: every-monday
+  source:
+    days:
+    - Monday
+    location: Australia/Melbourne
+    start: 12:00 AM
+    stop: 5:00 AM
+  type: time
