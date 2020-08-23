@@ -12,7 +12,7 @@ jobs:
   - get: thatsamguy-web
     trigger: true
   - file: thatsamguy-web/pipeline-letsencrypt.yml
-    set_pipeline: thatsamguy-web
+    set_pipeline: letsencrypt
 - name: generate-certs
   on_error:
     params:
