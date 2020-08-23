@@ -45,8 +45,6 @@ jobs:
   - get: thatsamguy-letsencrypt
     passed:
     - pipeline
-  - get: every-monday
-    trigger: true
   - config:
       image_resource:
         source:
@@ -66,11 +64,12 @@ jobs:
       run:
         args:
         - -euxc
-        - if [ "$(cat thatsamguy-letsencrypt/version)" != "0" ]; then tar xzvf thatsamguy-letsencrypt/letsencrypt.tar.gz;
+        - pwd=$(pwd); if [ "$(cat thatsamguy-letsencrypt/version)" != "0" ]; then
+          cd /; tar xzvf "$pwd"/thatsamguy-letsencrypt/letsencrypt.tar.gz; cd "$pwd";
           else echo "No cache tarball located. Starting bootstrap."; fi; certbot certonly
-          --config-dir etc/letsencrypt -n --agree-tos --no-eff-email --email webmaster@thatsamguy.com
-          --dns-route53 -d thatsamguy.com -d '*.thatsamguy.com' --renew-by-default
-          && tar czvf build/letsencrypt.tar.gz etc/letsencrypt;
+          -n --agree-tos --no-eff-email --email webmaster@thatsamguy.com --dns-route53
+          -d thatsamguy.com -d '*.thatsamguy.com' --renew-by-default && tar czvf build/letsencrypt.tar.gz
+          /etc/letsencrypt;
         path: bash
     task: generate-certs
   - params:
@@ -106,12 +105,3 @@ resources:
   source:
     url: ((slack-webhook))
   type: slack-notification
-- icon: clock-outline
-  name: every-monday
-  source:
-    days:
-    - Monday
-    location: Australia/Melbourne
-    start: 12:00 AM
-    stop: 5:00 AM
-  type: time
