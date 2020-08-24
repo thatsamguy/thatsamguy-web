@@ -88,6 +88,8 @@ resources:
   source:
     branch: main
     password: ((github-password))
+    paths:
+    - pipeline-letsencrypt.yml
     private_key: ((github-private-key))
     uri: git@github.com:thatsamguy/thatsamguy-web.git
     username: ((github-username))
