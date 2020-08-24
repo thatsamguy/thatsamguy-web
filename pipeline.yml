@@ -79,6 +79,8 @@ resources:
   name: thatsamguy-web
   source:
     branch: main
+    ignore_paths:
+    - pipeline-letsencrypt.yml
     password: ((github-password))
     private_key: ((github-private-key))
     uri: git@github.com:thatsamguy/thatsamguy-web.git
