@@ -70,8 +70,8 @@ jobs:
           cd /; tar xzvf "$pwd"/thatsamguy-letsencrypt/letsencrypt.tar.gz; cd "$pwd";
           else echo "No cache tarball located. Starting bootstrap."; fi; certbot certonly
           -n --agree-tos --no-eff-email --email webmaster@thatsamguy.com --dns-route53
-          -d thatsamguy.com -d '*.thatsamguy.com' --renew-by-default && tar czvf build/letsencrypt.tar.gz
-          /etc/letsencrypt;
+          -d thatsamguy.com -d '*.thatsamguy.com' --keep-until-expiring && tar czvf
+          build/letsencrypt.tar.gz /etc/letsencrypt;
         path: bash
     task: generate-certs
   - params:
