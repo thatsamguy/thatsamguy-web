@@ -23,6 +23,7 @@ jobs:
         :boom: $BUILD_JOB_NAME of $BUILD_PIPELINE_NAME failed. <((ci-url))/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME|Check it out>.
       username: concourse
     put: notify
+    tags: [amd64]
   on_failure: *failure
   on_success: &success
     params:
@@ -33,6 +34,7 @@ jobs:
         :airplane_departure: $BUILD_JOB_NAME of $BUILD_PIPELINE_NAME completed! <((ci-url))/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME|Check it out>.
       username: concourse
     put: notify
+    tags: [amd64]
   plan:
   - get: thatsamguy-letsencrypt
     passed:
@@ -42,7 +44,7 @@ jobs:
   - config:
       image_resource:
         source:
-          repository: registry.thatsamguy.com/thatsamguy/certbot-dns
+          repository: registry.thatsamguy.com/thatsamguy/certbot-dns-arm64
           tag: latest
         type: registry-image
       inputs:
@@ -66,9 +68,11 @@ jobs:
           build/letsencrypt.tar.gz /etc/letsencrypt;
         path: bash
     task: generate-certs
+    tags: [arm64]
   - params:
       file: build/letsencrypt.tar.gz
     put: thatsamguy-letsencrypt
+    tags: [arm64]
 resource_types:
 - name: slack-notification
   source:
