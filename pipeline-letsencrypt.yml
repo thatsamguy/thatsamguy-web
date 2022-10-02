@@ -39,7 +39,7 @@ jobs:
   - get: thatsamguy-letsencrypt
     passed:
     - pipeline
-    tags: [arm64]
+    tags: [amd64]
   - get: every-monday
     trigger: true
   - config:
