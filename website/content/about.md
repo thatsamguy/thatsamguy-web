@@ -20,17 +20,18 @@ LinkedIn: [thatsamguy](https://www.linkedin.com/in/thatsamguy)
 
 Employer: [Slack](https://slack.com) (a [Salesforce](https://www.salesforce.com) company)
 
-Role: [Senior Software Engineer, Cloud](https://www.linkedin.com/in/thatsamguy)
+Role: [Manager, Software Engineering](https://www.linkedin.com/in/thatsamguy)
 
 Previously:
 
+* (2020-2022) - [Slack](https://slack.com) - Senior Software Engineer, Cloud
 * (2019-2020) - [REA Group](https://www.rea-group.com) - Senior Systems Engineer
 * (2012-2018) - [Schoolbox](https://schoolbox.com.au/) - Systems Engineer
 
 Main interests (outside of spending time with my wife, two children and two cats):
 
-* DevOps culture and automation software – [Concourse CI](https://concourse-ci.org/)
-* Open source software – Linux, [Nginx](https://nginx.org/), [WireGuard](https://wireguard.com/)
+* Building safe, consistent, high performing teams
+* Open source software
 * [Geelong Cats](http://www.geelongcats.com.au/) (AFL), [Everton](http://www.evertonfc.com/home) (EPL)
 
 Aliases: thatsamguy, thatSamGuy, that_sam_guy, cyprix, cyprix_overlord, redcyprix
