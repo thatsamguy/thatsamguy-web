@@ -39,7 +39,7 @@
                     <ul class="sidebar-nav">
                         {% block sidebar_nav %}
                         {% for link in config.extra.hyde_links %}
-                        {% if config.extra.hyde_link.rel %}
+                        {% if config.extra.hyde_link.rel != "" %}
                         <li class="sidebar-nav-item"><a rel="{{link.rel}}" href="{{link.url}}">{{link.name}}</a></li>
                         {% else %}
                         <li class="sidebar-nav-item"><a href="{{link.url}}">{{link.name}}</a></li>

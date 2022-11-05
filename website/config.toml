@@ -12,7 +12,6 @@ hyde_reverse = false
 hyde_theme = ""
 hyde_links = [
     {url = "/about/", name = "About Sam"},
-    {url = "#", name = ""},
     {url = "https://hachyderm.io/@thatsamguy", name = "🐘: @thatsamguy@hachyderm.io", rel = "me"},
     {url = "https://twitter.com/that_sam_guy", name = "🐦: @that_sam_guy"},
     {url = "https://github.com/thatsamguy", name = "GitHub: thatsamguy"},
