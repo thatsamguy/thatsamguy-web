@@ -13,6 +13,7 @@ hyde_theme = ""
 hyde_links = [
     {url = "/about/", name = "About Sam"},
     {url = "#", name = ""},
+    {url = "https://hachyderm.io/@thatsamguy", name = "Mastodon: @thatsamguy@hachyderm.io", rel = "me"},
     {url = "https://twitter.com/that_sam_guy", name = "Twitter: @that_sam_guy"},
     {url = "https://github.com/thatsamguy", name = "GitHub: thatsamguy"},
     {url = "https://www.linkedin.com/in/thatsamguy", name = "LinkedIn: thatsamguy"},
