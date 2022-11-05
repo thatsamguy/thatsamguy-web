@@ -11,9 +11,9 @@ hyde_sticky = true
 hyde_reverse = false
 hyde_theme = ""
 hyde_links = [
-    {url = "/about/", name = "About Sam"},
+    {url = "/about/", name = "About Sam", rel = "me"},
     {url = "https://hachyderm.io/@thatsamguy", name = "🐘: @thatsamguy@hachyderm.io", rel = "me"},
-    {url = "https://twitter.com/that_sam_guy", name = "🐦: @that_sam_guy"},
-    {url = "https://github.com/thatsamguy", name = "GitHub: thatsamguy"},
-    {url = "https://www.linkedin.com/in/thatsamguy", name = "LinkedIn: thatsamguy"},
+    {url = "https://twitter.com/that_sam_guy", name = "🐦: @that_sam_guy", rel = "me"},
+    {url = "https://github.com/thatsamguy", name = "GitHub: thatsamguy", rel = "me"},
+    {url = "https://www.linkedin.com/in/thatsamguy", name = "LinkedIn: thatsamguy", rel = "me"},
 ]
