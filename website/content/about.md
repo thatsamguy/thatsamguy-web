@@ -14,7 +14,7 @@ Location: Melbourne, Australia
 
 Twitter: [@that_sam_guy](https://twitter.com/that_sam_guy)
 
-Mastodon: [@thatsamguy@hachyderm.io](https://hachyderm.io/@thatsamguy)
+Mastodon: <a rel="me" href="https://hachyderm.io/@thatsamguy">@thatsamguy@hachyderm.io</a>
 
 Cohost: [thatSamGuy](https://cohost.org/thatSamGuy)
 
