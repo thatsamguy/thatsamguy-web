@@ -12,11 +12,7 @@ Email: sam@thatsamguy.com
 
 Location: Melbourne, Australia
 
-Twitter: [@that_sam_guy](https://twitter.com/that_sam_guy)
-
 Mastodon: <a rel="me" href="https://hachyderm.io/@thatsamguy">@thatsamguy@hachyderm.io</a>
-
-Cohost: [thatSamGuy](https://cohost.org/thatSamGuy)
 
 GitHub: [thatsamguy](https://github.com/thatsamguy)
 
