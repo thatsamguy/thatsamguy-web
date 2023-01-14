@@ -64,7 +64,7 @@ jobs:
         args:
         - -euxc
         - dnf install -y zola && cd thatsamguy-web/website && zola build && cp -vr
-          public/* ../../public/
+          public/* ../../public/ && cp -vr static/.well-known ../../public/
         path: bash
     task: build
     tags: [amd64]
