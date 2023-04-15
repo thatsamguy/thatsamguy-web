@@ -39,13 +39,13 @@ jobs:
   - get: thatsamguy-letsencrypt
     passed:
     - pipeline
-    tags: [arm64]
+    tags: [amd64]
   - get: every-monday
     trigger: true
   - config:
       image_resource:
         source:
-          repository: registry.thatsamguy.com/thatsamguy/certbot-dns-arm64
+          repository: registry.thatsamguy.com/thatsamguy/certbot-dns
           tag: latest
         type: registry-image
       inputs:
@@ -69,11 +69,11 @@ jobs:
           build/letsencrypt.tar.gz /etc/letsencrypt;
         path: bash
     task: generate-certs
-    tags: [arm64]
+    tags: [amd64]
   - params:
       file: build/letsencrypt.tar.gz
     put: thatsamguy-letsencrypt
-    tags: [arm64]
+    tags: [amd64]
 resource_types:
 - name: slack-notification
   source:
