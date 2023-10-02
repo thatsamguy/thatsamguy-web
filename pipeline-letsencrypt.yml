@@ -40,8 +40,6 @@ jobs:
     passed:
     - pipeline
     tags: [amd64]
-  - get: every-monday
-    trigger: true
   - config:
       image_resource:
         source:
@@ -106,12 +104,3 @@ resources:
   source:
     url: ((slack-webhook))
   type: slack-notification
-- icon: clock-outline
-  name: every-monday
-  source:
-    days:
-    - Monday
-    location: Australia/Melbourne
-    start: 12:00 AM
-    stop: 5:00 AM
-  type: time
