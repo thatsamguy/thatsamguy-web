@@ -45,7 +45,7 @@ jobs:
   - config:
       image_resource:
         source:
-          repository: registry2.thatsamguy.com/thatsamguy/certbot-dns
+          repository: registry.thatsamguy.com/thatsamguy/certbot-dns
           tag: latest
         type: registry-image
       inputs:
