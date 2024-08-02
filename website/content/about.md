@@ -18,12 +18,13 @@ GitHub: [thatsamguy](https://github.com/thatsamguy)
 
 LinkedIn: [thatsamguy](https://www.linkedin.com/in/thatsamguy)
 
-Employer: [Slack](https://slack.com) (a [Salesforce](https://www.salesforce.com) company)
+Employer: [Slack](https://slack.com) (from [Salesforce](https://www.salesforce.com))
 
 Role: [Senior Manager, Software Engineering](https://www.linkedin.com/in/thatsamguy)
 
 Previously:
 
+* (2022-2024) - [Slack](https://slack.com) - Manager, Software Engineering, Cloud
 * (2020-2022) - [Slack](https://slack.com) - Senior Software Engineer, Cloud
 * (2019-2020) - [REA Group](https://www.rea-group.com) - Senior Systems Engineer
 * (2012-2018) - [Schoolbox](https://schoolbox.com.au/) - Systems Engineer
