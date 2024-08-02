@@ -20,7 +20,7 @@ LinkedIn: [thatsamguy](https://www.linkedin.com/in/thatsamguy)
 
 Employer: [Slack](https://slack.com) (a [Salesforce](https://www.salesforce.com) company)
 
-Role: [Manager, Software Engineering](https://www.linkedin.com/in/thatsamguy)
+Role: [Senior Manager, Software Engineering](https://www.linkedin.com/in/thatsamguy)
 
 Previously:
 
