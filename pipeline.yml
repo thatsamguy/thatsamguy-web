@@ -22,7 +22,6 @@ jobs:
         :boom: A build of $BUILD_PIPELINE_NAME errored. Check it out <((ci-url))/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME|here>.
       username: concourse
     put: notify
-    tags: [amd64]
   on_failure:
     params:
       channel: '#build'
@@ -32,7 +31,6 @@ jobs:
         :boom: A build of $BUILD_PIPELINE_NAME failed. Check it out <((ci-url))/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME|here>.
       username: concourse
     put: notify
-    tags: [amd64]
   on_success:
     params:
       channel: '#build'
@@ -42,7 +40,6 @@ jobs:
         :airplane_departure: A new build of $BUILD_PIPELINE_NAME deployed! Check it out <((ci-url))/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME|here>.
       username: concourse
     put: notify
-    tags: [amd64]
   plan:
   - get: thatsamguy-web
     passed:
@@ -67,9 +64,7 @@ jobs:
           public/* ../../public/ && cp -vr static/.well-known ../../public/
         path: bash
     task: build
-    tags: [amd64]
   - put: deploy
-    tags: [amd64]
 resource_types:
 - name: s3-sync
   source:

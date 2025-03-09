@@ -23,7 +23,6 @@ jobs:
         :boom: $BUILD_JOB_NAME of $BUILD_PIPELINE_NAME failed. <((ci-url))/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME|Check it out>.
       username: concourse
     put: notify
-    tags: [amd64]
   on_failure: *failure
   on_success: &success
     params:
@@ -34,12 +33,10 @@ jobs:
         :airplane_departure: $BUILD_JOB_NAME of $BUILD_PIPELINE_NAME completed! <((ci-url))/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME|Check it out>.
       username: concourse
     put: notify
-    tags: [amd64]
   plan:
   - get: thatsamguy-letsencrypt
     passed:
     - pipeline
-    tags: [amd64]
   - get: every-monday
     trigger: true
   - config:
@@ -69,11 +66,9 @@ jobs:
           build/letsencrypt.tar.gz /etc/letsencrypt;
         path: bash
     task: generate-certs
-    tags: [amd64]
   - params:
       file: build/letsencrypt.tar.gz
     put: thatsamguy-letsencrypt
-    tags: [amd64]
 resource_types:
 - name: slack-notification
   source:
