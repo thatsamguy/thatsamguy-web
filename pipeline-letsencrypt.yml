@@ -1,6 +1,7 @@
 groups:
 - jobs:
   - generate-certs
+  - deploy-certs
   name: build
 - jobs:
   - pipeline
@@ -58,17 +59,191 @@ jobs:
       run:
         args:
         - -euxc
-        - pwd=$(pwd); if [ "$(cat thatsamguy-letsencrypt/version)" != "0" ]; then
-          cd /; tar xzvf "$pwd"/thatsamguy-letsencrypt/letsencrypt.tar.gz; cd "$pwd";
-          else echo "No cache tarball located. Starting bootstrap."; fi; certbot certonly
-          -n --agree-tos --no-eff-email --email webmaster@thatsamguy.com --dns-route53
-          -d thatsamguy.com -d '*.thatsamguy.com' --keep-until-expiring && tar czvf
-          build/letsencrypt.tar.gz /etc/letsencrypt;
+        - |
+          pwd=$(pwd)
+
+          # Extract existing certificates if available
+          if [ "$(cat thatsamguy-letsencrypt/version)" != "0" ]; then
+              cd /
+              tar xzvf "$pwd"/thatsamguy-letsencrypt/letsencrypt.tar.gz
+              cd "$pwd"
+          else
+              echo "No cache tarball located. Starting bootstrap."
+          fi
+
+          # Run certbot and capture output
+          echo "Running certbot..."
+          set +e
+          CERTBOT_OUTPUT=$(certbot certonly \
+              -n \
+              --agree-tos \
+              --no-eff-email \
+              --email webmaster@thatsamguy.com \
+              --dns-route53 \
+              -d thatsamguy.com \
+              -d '*.thatsamguy.com' \
+              --keep-until-expiring 2>&1)
+          CERTBOT_EXIT=$?
+          set -e
+
+          echo "$CERTBOT_OUTPUT"
+
+          if [ $CERTBOT_EXIT -ne 0 ]; then
+              echo "Certbot failed with exit code $CERTBOT_EXIT"
+              exit 1
+          fi
+
+          # Create tarball (always, for backup purposes)
+          tar czvf build/letsencrypt.tar.gz /etc/letsencrypt
+
+          # Check if renewal actually occurred
+          if echo "$CERTBOT_OUTPUT" | grep -q "Successfully received certificate"; then
+              echo "Certificate was renewed!"
+              echo "renewed" > build/renewal-flag
+              date -u +"%Y-%m-%dT%H:%M:%SZ" >> build/renewal-flag
+          else
+              echo "No renewal needed - certificate not yet due"
+          fi
         path: bash
     task: generate-certs
   - params:
       file: build/letsencrypt.tar.gz
     put: thatsamguy-letsencrypt
+  # Upload flag only if renewal occurred
+  - task: check-renewal
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: alpine
+          tag: "3.22"
+      inputs:
+      - name: build
+      outputs:
+      - name: flag
+      run:
+        path: sh
+        args:
+        - -c
+        - |
+          if [ -f build/renewal-flag ]; then
+              cp build/renewal-flag flag/renewal-occurred
+              echo "Renewal flag detected, will trigger deployment"
+          else
+              echo "No renewal flag, skipping deployment trigger"
+          fi
+  - try:
+      put: thatsamguy-letsencrypt-renewed
+      params:
+        file: flag/renewal-occurred
+
+- name: deploy-certs
+  on_error: &deploy-failure
+    params:
+      channel: '#build'
+      icon_url: https://concourse-ci.org/images/trademarks/concourse-black.png
+      silent: true
+      text: |
+        :boom: Certificate deployment failed! <((ci-url))/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME|Check it out>.
+      username: concourse
+    put: notify
+  on_failure: *deploy-failure
+  on_success:
+    params:
+      channel: '#build'
+      icon_url: https://concourse-ci.org/images/trademarks/concourse-black.png
+      silent: true
+      text: |
+        :lock: Certificates deployed successfully! <((ci-url))/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME|Check it out>.
+      username: concourse
+    put: notify
+  plan:
+  - get: thatsamguy-letsencrypt-renewed
+    trigger: true
+    passed:
+    - generate-certs
+  - task: deploy-to-orcus
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: ubuntu
+          tag: "24.04"
+      params:
+        NOMAD_ADDR: ((nomad-address))
+        NOMAD_TOKEN: ((nomad-token))
+        AWS_ACCESS_KEY_ID: ((aws-access-key-id))
+        AWS_SECRET_ACCESS_KEY: ((aws-secret-access-key))
+      run:
+        path: bash
+        args:
+        - -exc
+        - |
+          apt-get update && apt-get install -y curl jq unzip
+          latest=$(curl -q "https://releases.hashicorp.com/nomad/" 2>/dev/null | grep "nomad" | cut -d'>' -f2 | cut -d'<' -f1 | cut -d'_' -f2 | grep -v '\+' | grep -v '\-' | sort -V | tail -n 1)
+          VERSION="${latest:-1.11.1}"
+          curl -fsSL https://releases.hashicorp.com/nomad/${VERSION}/nomad_${VERSION}_linux_amd64.zip -o /tmp/nomad.zip
+          unzip /tmp/nomad.zip -d /usr/local/bin/
+
+          echo "=== Dispatching deploy-certs-orcus ==="
+          nomad job dispatch \
+            -meta AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" \
+            -meta AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY" \
+            -meta TRIGGER_SOURCE=concourse \
+            deploy-certs-orcus
+
+          echo "=== Restarting tv web allocation ==="
+          ALLOC_ID=$(nomad job allocs -json tv | jq -r '.[] | select(.TaskGroup == "web") | select(.ClientStatus == "running") | .ID' | head -1)
+          [ -n "$ALLOC_ID" ] && nomad alloc restart "$ALLOC_ID" video || echo "No running tv/web allocation found"
+          echo "=== Orcus complete ==="
+  - task: wait-for-orcus
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: alpine
+          tag: "3.22"
+      run:
+        path: sh
+        args:
+        - -c
+        - |
+          apk add --no-cache curl
+          sleep 30
+          for i in $(seq 1 6); do
+              curl -sf -o /dev/null https://tls.thatsamguy.com/ && exit 0
+              sleep 10
+          done
+          echo "WARNING: tls.thatsamguy.com not responding"
+  - task: deploy-to-kore
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: ubuntu
+          tag: "24.04"
+      params:
+        NOMAD_ADDR: ((nomad-address))
+        NOMAD_TOKEN: ((nomad-token))
+      run:
+        path: bash
+        args:
+        - -exc
+        - |
+          apt-get update && apt-get install -y curl unzip
+          latest=$(curl -q "https://releases.hashicorp.com/nomad/" 2>/dev/null | grep "nomad" | cut -d'>' -f2 | cut -d'<' -f1 | cut -d'_' -f2 | grep -v '\+' | grep -v '\-' | sort -V | tail -n 1)
+          VERSION="${latest:-1.11.1}"
+          curl -fsSL https://releases.hashicorp.com/nomad/${VERSION}/nomad_${VERSION}_linux_amd64.zip -o /tmp/nomad.zip
+          unzip /tmp/nomad.zip -d /usr/local/bin/
+
+          echo "=== Dispatching deploy-certs-kore ==="
+          nomad job dispatch -meta TRIGGER_SOURCE=concourse deploy-certs-kore
+          echo "=== Kore complete ==="
+
 resource_types:
 - name: slack-notification
   source:
@@ -95,6 +270,15 @@ resources:
     region_name: us-east-1
     secret_access_key: ((aws-secret-access-key))
     versioned_file: letsencrypt.tar.gz
+  type: s3
+- name: thatsamguy-letsencrypt-renewed
+  source:
+    access_key_id: ((aws-access-key-id))
+    bucket: thatsamguy-letsencrypt
+    private: true
+    region_name: us-east-1
+    secret_access_key: ((aws-secret-access-key))
+    versioned_file: renewal-occurred
   type: s3
 - icon: slack
   name: notify
