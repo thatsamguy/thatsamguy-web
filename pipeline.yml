@@ -54,35 +54,48 @@ jobs:
       inputs:
       - name: thatsamguy-web
       outputs:
-      - name: public
-        path: public/
+      - name: built-site
       platform: linux
       run:
-        path: sh
+        path: zola
         args:
-        - -euxc
-        - |
-          # Display version for debugging
-          zola --version
-
-          # Build the site
-          cd thatsamguy-web/website
-          zola build
-
-          # Copy built site to output
-          cp -vr public/* ../../public/
-
-          # Ensure .well-known is preserved (webfinger, etc.)
-          if [ -d "static/.well-known" ]; then
-            cp -vr static/.well-known ../../public/
-          fi
+        - build
+        - --output-dir
+        - ../../built-site/public
+        dir: thatsamguy-web/website
     task: build
-  - put: deploy
+  - config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: amazon/aws-cli
+          tag: latest
+      inputs:
+      - name: built-site
+      run:
+        path: /bin/sh
+        args:
+        - -c
+        - |
+          echo "Syncing to S3..."
+          ls -1 built-site/public/ || exit
+          aws s3 sync built-site/public/ s3://aws-website-thatsamguy-00trx/ \
+            --delete \
+            --region us-east-1 \
+            --exclude ".git/*" \
+            --exclude "wu/*"
+
+          # 2. (Optional) Invalidate CloudFront
+          # echo "Invalidating CloudFront..."
+          # aws cloudfront create-invalidation --distribution-id YOUR_DIST_ID --paths "/*"
+    params:
+      # Pass credentials as env vars
+      AWS_ACCESS_KEY_ID: ((aws-access-key-id))
+      AWS_SECRET_ACCESS_KEY: ((aws-secret-access-key))
+      AWS_DEFAULT_REGION: us-east-1
+    task: deploy
 resource_types:
-- name: s3-sync
-  source:
-    repository: firespring/concourse-s3-sync-resource
-  type: docker-image
 - name: slack-notification
   source:
     repository: cfcommunity/slack-notification-resource
@@ -99,17 +112,6 @@ resources:
     uri: git@github.com:thatsamguy/thatsamguy-web.git
     username: ((github-username))
   type: git
-- name: deploy
-  source:
-    access_key_id: ((aws-access-key-id))
-    bucket: aws-website-thatsamguy-00trx
-    directory: public/
-    options:
-    - --exclude '.git*'
-    - --exclude 'wu/*'
-    region: us-east-1
-    secret_access_key: ((aws-secret-access-key))
-  type: s3-sync
 - icon: slack
   name: notify
   source:
