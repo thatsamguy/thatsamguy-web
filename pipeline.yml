@@ -48,8 +48,8 @@ jobs:
   - config:
       image_resource:
         source:
-          repository: fedora
-          tag: "31"
+          repository: ghcr.io/getzola/zola
+          tag: "v0.22.1"
         type: registry-image
       inputs:
       - name: thatsamguy-web
@@ -58,11 +58,24 @@ jobs:
         path: public/
       platform: linux
       run:
+        path: sh
         args:
         - -euxc
-        - dnf install -y zola && cd thatsamguy-web/website && zola build && cp -vr
-          public/* ../../public/ && cp -vr static/.well-known ../../public/
-        path: bash
+        - |
+          # Display version for debugging
+          zola --version
+
+          # Build the site
+          cd thatsamguy-web/website
+          zola build
+
+          # Copy built site to output
+          cp -vr public/* ../../public/
+
+          # Ensure .well-known is preserved (webfinger, etc.)
+          if [ -d "static/.well-known" ]; then
+            cp -vr static/.well-known ../../public/
+          fi
     task: build
   - put: deploy
 resource_types:

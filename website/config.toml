@@ -1,18 +1,20 @@
 base_url = "https://thatsamguy.com"
-title = "Sam Bailey"
-description = "(thatsamguy)"
+title = "Sam Bailey (thatsamguy)"
+description = "Personal blog of Sam Bailey"
 compile_sass = true
-highlight_code = true
-build_search_index = true
-theme = "hyde"
+build_search_index = false
+
+# Use the new custom theme
+theme = "thatsamguy"
+
+# Enable RSS/Atom feed
+generate_feeds = true
+feed_filenames = ["atom.xml"]
 
 [extra]
-hyde_sticky = true
-hyde_reverse = false
-hyde_theme = ""
-hyde_links = [
-    {url = "/about/", name = "About Sam"},
-    {url = "https://hachyderm.io/@thatsamguy", name = "🐘: @thatsamguy@hachyderm.io"},
-    {url = "https://github.com/thatsamguy", name = "GitHub: thatsamguy"},
-    {url = "https://www.linkedin.com/in/thatsamguy", name = "LinkedIn: thatsamguy"},
+# Social links displayed in footer
+social_links = [
+    {url = "https://hachyderm.io/@thatsamguy", name = "Mastodon"},
+    {url = "https://github.com/thatsamguy", name = "GitHub"},
+    {url = "https://www.linkedin.com/in/thatsamguy", name = "LinkedIn"},
 ]

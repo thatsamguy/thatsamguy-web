@@ -1,11 +1,11 @@
 +++
 title = "Nginx - logging milliseconds in ISO8601 format"
 date = 2019-03-13
-[taxonomies]
-tags = ["nginx", "thingsineverwanttolookforagain", "iso8601"]
 +++
 
 Nginx has two variables for time that you can use in your logs.
+
+<!-- more -->
 
 * `$msec` - Unix timestamp with millisecond precision
   * E.g.: `1551758550.627`
