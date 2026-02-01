@@ -84,6 +84,7 @@ jobs:
             --delete \
             --region us-east-1 \
             --exclude ".git/*" \
+            --exclude ".gitignore" \
             --exclude "wu/*"
 
           # 2. (Optional) Invalidate CloudFront
