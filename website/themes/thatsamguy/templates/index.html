@@ -32,10 +32,6 @@
       {% elif page.description %}
       <p class="post-excerpt">{{ page.description }}</p>
       {% endif %}
-
-      {% if not page.extra.external_url %}
-      <a href="{{ page.permalink }}" class="post-read-more">Read more</a>
-      {% endif %}
     </article>
     {% endif %}
     {% endfor %}

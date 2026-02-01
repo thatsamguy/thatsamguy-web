@@ -1,6 +1,6 @@
 base_url = "https://thatsamguy.com"
 title = "Sam Bailey (thatsamguy)"
-description = "Personal blog of Sam Bailey"
+description = "thatsamguy's bits and pieces"
 author = "Sam Bailey"
 compile_sass = true
 build_search_index = false

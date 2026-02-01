@@ -12,10 +12,13 @@ Alias: thatsamguy
 
 ## Work History
 
-- **2022-present** - Slack - Senior Manager / Manager, Software Engineering
-- **2020-2022** - Slack - Senior Software Engineer, Cloud
-- **2019-2020** - REA Group - Senior Systems Engineer
-- **2012-2018** - Schoolbox - Systems Engineer
+Current: Senior Manager, Software Engineering for [Slack](https://slack.com) (from [Salesforce](https://www.salesforce.com))
+
+- **2024-present** - [Slack](https://slack.com) - Senior Manager, Software Engineering
+- **2022-2024** - [Slack](https://slack.com) - Manager, Software Engineering
+- **2020-2022** - [Slack](https://slack.com) - Senior Software Engineer, Cloud
+- **2019-2020** - [REA Group](https://www.rea-group.com) - Senior Systems Engineer
+- **2012-2018** - [Schoolbox](https://schoolbox.com.au/) - Systems Engineer
 
 ## Outside Work
 
@@ -26,5 +29,5 @@ I also follow the [Geelong Cats](http://www.geelongcats.com.au/) (AFL) and
 ## Contact
 
 - Email: sam@thatsamguy.com
-- Mastodon: <a rel="me" href="https://hachyderm.io/@thatsamguy">@thatsamguy@hachyderm.io</a>
+- Mastodon/Fediverse: <a rel="me" href="https://hachyderm.io/@thatsamguy">@thatsamguy@hachyderm.io</a>
 - LinkedIn: [thatsamguy](https://www.linkedin.com/in/thatsamguy)
