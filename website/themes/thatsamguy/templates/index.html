@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% set section = get_section(path="_index.md") %}
+<div class="container">
+  <div class="posts">
+    {% for page in section.pages %}
+    {% if page.path != "/about/" %}
+    <article class="post-item">
+      <div class="post-meta">
+        <time class="post-date" datetime="{{ page.date }}">{{ page.date | date(format="%Y-%m-%d") }}</time>
+        {% if page.extra.external_url %}
+        <span class="external-indicator">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7zm-2 16H5V7h7V5H5a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-7h-2v7H7z"/>
+          </svg>
+          External
+        </span>
+        {% endif %}
+      </div>
+
+      <h3 class="post-title">
+        {% if page.extra.external_url %}
+        <a href="{{ page.extra.external_url }}" rel="noopener">{{ page.title }}</a>
+        {% else %}
+        <a href="{{ page.permalink }}">{{ page.title }}</a>
+        {% endif %}
+      </h3>
+
+      {% if page.summary %}
+      <p class="post-excerpt">{{ page.summary | safe }}</p>
+      {% elif page.description %}
+      <p class="post-excerpt">{{ page.description }}</p>
+      {% endif %}
+    </article>
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

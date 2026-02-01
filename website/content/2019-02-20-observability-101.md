@@ -1,10 +1,10 @@
 +++
 title = "Observability 101"
 date = 2019-02-20
-[taxonomies]
-tags = ["observability", "o11y", "monitoring", "logging", "events"]
 +++
 The following post is based upon a previous blog post and talk I gave at [work](https://www.rea-group.com "REA Group") recently.
+
+<!-- more -->
 
 ## Moving beyond monitoring
 
