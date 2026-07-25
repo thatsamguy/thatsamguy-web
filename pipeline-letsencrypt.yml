@@ -218,31 +218,6 @@ jobs:
               sleep 10
           done
           echo "WARNING: tls.thatsamguy.com not responding"
-  - task: deploy-to-kore
-    config:
-      platform: linux
-      image_resource:
-        type: registry-image
-        source:
-          repository: ubuntu
-          tag: "24.04"
-      params:
-        NOMAD_ADDR: ((nomad-address))
-        NOMAD_TOKEN: ((nomad-token))
-      run:
-        path: bash
-        args:
-        - -exc
-        - |
-          apt-get update && apt-get install -y curl unzip
-          latest=$(curl -q "https://releases.hashicorp.com/nomad/" 2>/dev/null | grep "nomad" | cut -d'>' -f2 | cut -d'<' -f1 | cut -d'_' -f2 | grep -v '\+' | grep -v '\-' | sort -V | tail -n 1)
-          VERSION="${latest:-1.11.1}"
-          curl -fsSL https://releases.hashicorp.com/nomad/${VERSION}/nomad_${VERSION}_linux_amd64.zip -o /tmp/nomad.zip
-          unzip /tmp/nomad.zip -d /usr/local/bin/
-
-          echo "=== Dispatching deploy-certs-kore ==="
-          nomad job dispatch -meta TRIGGER_SOURCE=concourse deploy-certs-kore
-          echo "=== Kore complete ==="
 
 resource_types:
 - name: slack-notification
